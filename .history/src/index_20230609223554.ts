@@ -1,10 +1,13 @@
 import express from 'express'
 import usersRouter from './routes/users.routes'
 const app = express()
+
 const port = 3000
-// middleware
-app.use(express.json()) // xử lý những json đầu vào sang dạng object ({})
-// Router handler
+
+app.get('/', (req, res) => {
+  res.send('hello world')
+})
+
 app.use('/users', usersRouter)
 
 app.listen(port, () => {
