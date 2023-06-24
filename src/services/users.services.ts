@@ -12,6 +12,11 @@ class UsersService {
     )
     return result
   }
+  async checkEmailExist(email: string) {
+    const user = await databaseService.users.findOne({ email })
+    console.log(user)
+    return Boolean(user)
+  }
 }
 const userService = new UsersService() // tạo 1 cái object để được sử dụng register
 export default userService
