@@ -28,7 +28,7 @@ export const validate = (validation: RunnableValidationChains<ValidationChain>) 
       entityError.errors[key] = errorObject[key]
     }
     // res.status(400).json({ errors: errors.array() }) dùng array nên nó ra mảng 2 lần
-    // res.status(422).json({ errors: errors.mapped() }) // dùng maped thì no thành 1 obj và gọp lại với nhau
+    // res.status(422).json({ errors: errors.mapped() }) // dùng mapped thì no thành 1 obj và gọp lại với nhau
     next(entityError) // => error.middleware
   }
 }
