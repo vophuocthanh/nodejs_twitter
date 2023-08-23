@@ -1,7 +1,8 @@
 import { MongoClient, Db, Collection } from 'mongodb'
 import { config } from 'dotenv'
 import User from '~/models/schemas/User.schema'
-config()
+import RefreshToken from '~/models/schemas/RefreshToken.schema'
+config() // khi dùng process.env thì phải để config() vào, còn những file mà ko cần dùng thì do nó import những file đã để sẵn config() rồi. Nhưng mà nên dùng config() vào.
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@twitter.bebqcbd.mongodb.net/?retryWrites=true&w=majority`
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 class DatabaseService {
@@ -23,6 +24,9 @@ class DatabaseService {
   }
   get users(): Collection<User> {
     return this.db.collection(process.env.DB_USER_COLLECTION as string)
+  }
+  get refreshToken(): Collection<RefreshToken> {
+    return this.db.collection(process.env.DB_REFRESH_TOKEN_COLLECTION as string)
   }
 }
 // Tạo object từ class DatabaseServer

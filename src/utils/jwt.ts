@@ -1,4 +1,7 @@
+import { config } from 'dotenv'
 import jwt, { SignOptions } from 'jsonwebtoken'
+config()
+
 // signToken là 1 Promise (bất đồng bộ)
 // Dùng bất đồng bộ để tối ưu performance
 export const signToken = ({
