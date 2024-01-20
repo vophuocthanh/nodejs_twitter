@@ -44,7 +44,7 @@ class UsersService {
     )
     const user_id = result.insertedId.toString() // vì insertedId có kiểu là ObjectId nên cần phải . toString để nó convert sang string
     const [access_token, refresh_token] = await this.signAccessAndRefreshToken(user_id)
-    await databaseService.refreshToken.insertOne(
+    await databaseService.refreshTokens.insertOne(
       new RefreshToken({ user_id: new ObjectId(user_id), token: refresh_token })
     )
     return {
@@ -58,7 +58,7 @@ class UsersService {
   }
   async login(user_id: string) {
     const [access_token, refresh_token] = await this.signAccessAndRefreshToken(user_id)
-    await databaseService.refreshToken.insertOne(
+    await databaseService.refreshTokens.insertOne(
       new RefreshToken({ user_id: new ObjectId(user_id), token: refresh_token })
     )
     return { access_token, refresh_token }
