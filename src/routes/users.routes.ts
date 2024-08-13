@@ -1,6 +1,6 @@
 // All router trong file này là của users
 import { Router } from 'express'
-import { RegisterController, loginController } from '~/controllers/users.controllers'
+import { RegisterController, loginController, logoutController } from '~/controllers/users.controllers'
 import { RegisterValidator, accessTokenValidator, loginValidator } from '~/middlewares/users.middlewares' // ~ là thư mục src
 import { wrapRequestHandler } from '~/utils/handlers'
 const usersRouter = Router()
@@ -31,12 +31,6 @@ usersRouter.post(
  * Header: { Authorization: Bearer <access_token> }
  * Body: { refresh_token: string }
  */
-usersRouter.post(
-  '/logout',
-  accessTokenValidator,
-  wrapRequestHandler((req, res) => {
-    res.json({ message: 'Logout success' })
-  })
-)
+usersRouter.post('/logout', accessTokenValidator, wrapRequestHandler(logoutController))
 
 export default usersRouter
